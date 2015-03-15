@@ -13,4 +13,4 @@ var db = mongoose.connect(config.db, function (err) {
 
 require('./worker');
 
-console.log('User microservice started');
+console.log('Client microservice started');
