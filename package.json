@@ -1,0 +1,20 @@
+{
+  "name": "sitegate-client",
+  "version": "0.0.1",
+  "description": "Client microservice for SiteGate",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sitegate"
+  ],
+  "author": "Zoltan Kochan",
+  "license": "MIT",
+  "dependencies": {
+    "bograch": "0.0.2",
+    "bograch-amqp": "0.0.2",
+    "mongoose": "~3.8.25",
+    "lodash": "~3.5.0"
+  }
+}
