@@ -12,8 +12,8 @@
   "author": "Zoltan Kochan",
   "license": "MIT",
   "dependencies": {
-    "bograch": "0.0.2",
-    "bograch-amqp": "0.0.3",
+    "bograch": "0.0.4",
+    "bograch-amqp": "0.0.4",
     "mongoose": "~3.8.25",
     "lodash": "~3.5.0"
   }

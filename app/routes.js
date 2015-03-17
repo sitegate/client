@@ -7,16 +7,13 @@ var update = require('./update');
 var remove = require('./remove');
 var getByIds = require('./get-by-ids');
 
-module.exports = function (worker) {
-  worker.on('client.findByCreatorId', findByCreatorId);
-  
-  worker.on('client.create', create);
-  
-  worker.on('client.getById', getById);
-  
-  worker.on('client.update', update);
-  
-  worker.on('client.remove', remove);
-  
-  worker.on('client.getByIds', getByIds);
+module.exports = function (server) {
+  server.addMethods({
+    findByCreatorId: findByCreatorId,
+    create: create,
+    getById: getById,
+    update: update,
+    remove: remove,
+    getByIds: getByIds
+  });
 };
