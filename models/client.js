@@ -41,4 +41,8 @@ var ClientSchema = new Schema({
   }
 });
 
+ClientSchema.set('toJSON', {
+  virtuals: true
+});
+
 module.exports = mongoose.model('Client', ClientSchema);
