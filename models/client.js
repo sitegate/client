@@ -9,7 +9,7 @@ var ClientSchema = new Schema({
     unique: true,
     required: true
   },
-  id: {
+  publicId: {
     type: String,
     unique: true,
     required: true
