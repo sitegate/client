@@ -1,21 +1,13 @@
 'use strict';
 
-var findByCreatorId = require('./find-by-creator-id');
-var create = require('./create');
-var getById = require('./get-by-id');
-var getByPublicId = require('./get-by-public-id');
-var update = require('./update');
-var remove = require('./remove');
-var getByIds = require('./get-by-ids');
+var fs = require('fs');
 
 module.exports = function (server) {
-  server.addMethods({
-    findByCreatorId: findByCreatorId,
-    create: create,
-    getById: getById,
-    getByPublicId: getByPublicId,
-    update: update,
-    remove: remove,
-    getByIds: getByIds
+  var methods = fs.readdirSync('./app/methods/');
+  
+  var scope = {};
+  methods.forEach(function (method) {
+    scope[method.replace('.js', '')] = require('./methods/' + method);
   });
+  server.addMethods(scope);
 };
