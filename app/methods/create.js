@@ -1,6 +1,6 @@
 'use strict';
 
-var uid = require('../helpers/uid');
+var uid = require('rand-token').uid;
 var Client = require('../../models/client');
 
 module.exports = function (params, cb) {
