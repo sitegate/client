@@ -1,0 +1,1 @@
+# sitegate-client [![Dependency Status](https://david-dm.org/zkochan/sitegate-client/status.svg?style=flat)](https://david-dm.org/zkochan/sitegate-client) [![Build Status](http://img.shields.io/travis/zkochan/sitegate-client.svg?style=flat)](https://travis-ci.org/zkochan/sitegate-client)
