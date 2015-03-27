@@ -2,6 +2,6 @@
 
 var Client = require('../../models/client');
 
-module.exports = function (params, cb) {
-  Client.findByIdAndRemove(params.clientId, cb);
+module.exports = function (id, cb) {
+  Client.findByIdAndRemove(id, cb);
 };

@@ -2,10 +2,10 @@
 
 var Client = require('../../models/client');
 
-module.exports = function (params, cb) {
+module.exports = function (clientIds, cb) {
   Client.find({
     _id: {
-      $in: params.clientIds
+      $in: clientIds
     }
   }, cb);
 };

@@ -1,15 +1,20 @@
 'use strict';
 
 var Client = require('../../models/client');
+var ServerError = require('bograch').ServerError;
 
-module.exports = function (params, cb) {
+module.exports = function update(id, params, cb) {
   params = params || {};
-    
+  
   Client.findOne({
-    _id: params.clientId
+    _id: id
   }, function (err, client) {
     if (err) {
       return cb(err);
+    }
+    
+    if (!client) {
+      return cb(new ServerError('clientNotFound'));
     }
 
     if (client.userId !== params.userId) {

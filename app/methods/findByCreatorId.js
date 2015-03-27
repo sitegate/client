@@ -2,15 +2,13 @@
 
 var Client = require('../../models/client');
 
-module.exports = function (params, cb) {
-  params = params || {};
-
-  if (!params.userId) {
+module.exports = function (userId, cb) {
+  if (!userId) {
     return cb('userId is missing');
   }
 
   Client.find({
-    userId: params.userId
+    userId: userId
   }, function (err, clients) {
     if (err) {
       return cb(err);
