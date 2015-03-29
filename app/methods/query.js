@@ -6,13 +6,16 @@ module.exports = function (params, cb) {
   params = params || {};
   params.fields = params.fields || [];
 
-  if (!params.count) {
-    return cb(new Error('count is missing'));
-  }
-  
+  params.count = params.count || 100;
+
   var query = {};
   if (params.creatorId) {
     query.userId = params.creatorId;
+  }
+  if (params.ids) {
+    query._id = {
+      $in: params.ids
+    };
   }
 
   Client
