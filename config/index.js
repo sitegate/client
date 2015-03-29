@@ -11,7 +11,7 @@ var config = convict({
   },
   mongodbURL: {
     doc: 'MongoDB endpoint.',
-    default: 'mongodb://localhost/sitegate-dev',
+    default: 'mongodb://localhost/sitegate-client-dev',
     env: 'MONGODB_URL'
   },
   amqpURL: {
