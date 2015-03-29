@@ -1,19 +1,11 @@
 'use strict';
 
 var Client = require('../../models/client');
+var dfun = require('dfun');
 
-module.exports = function () {
-  var id = arguments[0];
-  var options, cb;
-  if (typeof arguments[1] === 'function') {
-    cb = arguments[1];
-  } else {
-    options = arguments[1];
-    cb = arguments[2];
-  }
+module.exports = dfun(String, [Object, {}], Function,
+  function (id, options, cb) {
+    options.fields = options.fields || [];
 
-  options = options || {};
-  options.fields = options.fields || [];
-
-  Client.findById(id, options.fields.join(' '), cb);
-};
+    Client.findById(id, options.fields.join(' '), cb);
+  });
