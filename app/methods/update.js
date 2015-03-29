@@ -37,6 +37,9 @@ module.exports = dfun(String, Object, [Object, {}], Function,
       if (typeof params.authCallbackUrl !== 'undefined') {
         client.authCallbackUrl = params.authCallbackUrl;
       }
+      if (typeof params.trusted !== 'undefined') {
+        client.trusted = params.trusted;
+      }
 
       client.save(cb);
     });
