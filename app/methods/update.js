@@ -40,6 +40,12 @@ module.exports = dfun(String, Object, [Object, {}], Function,
       if (typeof params.trusted !== 'undefined') {
         client.trusted = params.trusted;
       }
+      if (typeof params.publicId !== 'undefined') {
+        client.publicId = params.publicId;
+      }
+      if (typeof params.secret !== 'undefined') {
+        client.secret = params.secret;
+      }
 
       client.save(cb);
     });
