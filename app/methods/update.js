@@ -1,13 +1,12 @@
 'use strict';
 
 var Client = require('../../models/client');
-var ServerError = require('bograch').ServerError;
 var dfun = require('dfun');
 
 module.exports = dfun(String, Object, [Object, {}], Function,
   function (id, params, security, cb) {
     params = params || {};
-  
+
     Client.findOne({
       _id: id
     }, function (err, client) {
@@ -16,13 +15,12 @@ module.exports = dfun(String, Object, [Object, {}], Function,
       }
 
       if (!client) {
-        return cb(new ServerError('clientNotFound'));
+        return cb(new Error('clientNotFound'));
       }
 
       if (security.allow && security.allow.userId &&
         client.userId !== security.allow.userId) {
-        return cb(new ServerError('notAllowed',
-          'You cannot edit a client that was not created by you!'));
+        return cb(new Error('You cannot edit a client that was not created by you!'));
       }
 
       if (typeof params.name !== 'undefined') {
