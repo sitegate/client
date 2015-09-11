@@ -6,11 +6,15 @@
   "keywords": [
     "sitegate"
   ],
-  "author": "Zoltan Kochan",
+  "author": {
+    "name": "Zoltan Kochan",
+    "email": "zoltan.kochan@gmail.com",
+    "url": "http://kochan.io"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/zkochan/sitegate-client.git"
+    "url": "git://github.com/sitegate/client.git"
   },
   "dependencies": {
     "convict": "^1.0.1",
