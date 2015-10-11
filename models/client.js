@@ -42,7 +42,7 @@ var ClientSchema = new Schema({
 });
 
 ClientSchema.set('toJSON', {
-  transform: function (doc, ret, options) {
+  transform: function(doc, ret, options) {
     ret.id = ret._id;
     delete ret._id;
     delete ret.__v;
@@ -50,4 +50,6 @@ ClientSchema.set('toJSON', {
   }
 });
 
-module.exports = mongoose.model('Client', ClientSchema);
+module.exports = function(connection) {
+  return connection.model('Client', ClientSchema);
+};

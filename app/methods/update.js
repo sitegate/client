@@ -1,50 +1,53 @@
 'use strict';
 
-var Client = require('../../models/client');
 var dfun = require('dfun');
 
-module.exports = dfun(String, Object, [Object, {}], Function,
-  function (id, params, security, cb) {
-    params = params || {};
+module.exports = function(ms) {
+  var Client = ms.models.Client;
 
-    Client.findOne({
-      _id: id
-    }, function (err, client) {
-      if (err) {
-        return cb(err);
-      }
+  return dfun(String, Object, [Object, {}], Function,
+    function(id, params, security, cb) {
+      params = params || {};
 
-      if (!client) {
-        return cb(new Error('clientNotFound'));
-      }
+      Client.findOne({
+        _id: id
+      }, function(err, client) {
+        if (err) {
+          return cb(err);
+        }
 
-      if (security.allow && security.allow.userId &&
-        client.userId !== security.allow.userId) {
-        return cb(new Error('You cannot edit a client that was not created by you!'));
-      }
+        if (!client) {
+          return cb(new Error('clientNotFound'));
+        }
 
-      if (typeof params.name !== 'undefined') {
-        client.name = params.name;
-      }
-      if (typeof params.description !== 'undefined') {
-        client.description = params.description;
-      }
-      if (typeof params.homepageUrl !== 'undefined') {
-        client.homepageUrl = params.homepageUrl;
-      }
-      if (typeof params.authCallbackUrl !== 'undefined') {
-        client.authCallbackUrl = params.authCallbackUrl;
-      }
-      if (typeof params.trusted !== 'undefined') {
-        client.trusted = params.trusted;
-      }
-      if (typeof params.publicId !== 'undefined') {
-        client.publicId = params.publicId;
-      }
-      if (typeof params.secret !== 'undefined') {
-        client.secret = params.secret;
-      }
+        if (security.allow && security.allow.userId &&
+          client.userId !== security.allow.userId) {
+          return cb(new Error('You cannot edit a client that was not created by you!'));
+        }
 
-      client.save(cb);
+        if (typeof params.name !== 'undefined') {
+          client.name = params.name;
+        }
+        if (typeof params.description !== 'undefined') {
+          client.description = params.description;
+        }
+        if (typeof params.homepageUrl !== 'undefined') {
+          client.homepageUrl = params.homepageUrl;
+        }
+        if (typeof params.authCallbackUrl !== 'undefined') {
+          client.authCallbackUrl = params.authCallbackUrl;
+        }
+        if (typeof params.trusted !== 'undefined') {
+          client.trusted = params.trusted;
+        }
+        if (typeof params.publicId !== 'undefined') {
+          client.publicId = params.publicId;
+        }
+        if (typeof params.secret !== 'undefined') {
+          client.secret = params.secret;
+        }
+
+        client.save(cb);
+      });
     });
-  });
+};

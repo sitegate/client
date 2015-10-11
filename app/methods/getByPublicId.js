@@ -1,11 +1,13 @@
 'use strict';
 
-var Client = require('../../models/client');
+module.exports = function(ms) {
+  var Client = ms.models.Client;
 
-module.exports = function (publicId, cb) {
-  if (!publicId) {
-    return cb(new Error('publicId is missing'));
-  }
-  
-  Client.findOne({ publicId: publicId }, cb);
+  return function(publicId, cb) {
+    if (!publicId) {
+      return cb(new Error('publicId is missing'));
+    }
+
+    Client.findOne({ publicId: publicId }, cb);
+  };
 };

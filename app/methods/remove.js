@@ -1,7 +1,9 @@
 'use strict';
 
-var Client = require('../../models/client');
+module.exports = function(ms) {
+  var Client = ms.models.Client;
 
-module.exports = function (id, cb) {
-  Client.findByIdAndRemove(id, cb);
+  return function(id, cb) {
+    Client.findByIdAndRemove(id, cb);
+  };
 };
