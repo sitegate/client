@@ -1,6 +1,6 @@
 {
   "name": "sitegate-client",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Client microservice for SiteGate",
   "main": "./lib/index.js",
   "keywords": [
