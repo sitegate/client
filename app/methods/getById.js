@@ -1,14 +1,26 @@
-'use strict';
+'use strict'
+const joi = require('joi')
 
-var dfun = require('dfun');
+module.exports = function(ms, opts, next) {
+  let Client = ms.plugins.models.Client
 
-module.exports = function(ms) {
-  var Client = ms.models.Client;
+  ms.method({
+    name: 'getById',
+    config: {
+      validate: {
+        id: joi.string().required(),
+      },
+    },
+    handler(params, cb) {
+      params.fields = params.fields || [];
 
-  return dfun(String, [Object, {}], Function,
-    function(id, options, cb) {
-      options.fields = options.fields || [];
+      Client.findById(params.id, params.fields.join(' '), cb);
+    },
+  })
 
-      Client.findById(id, options.fields.join(' '), cb);
-    });
-};
+  next()
+}
+
+module.exports.attributes = {
+  name: 'get-by-id',
+}

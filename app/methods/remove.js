@@ -1,9 +1,24 @@
-'use strict';
+'use strict'
+const joi = require('joi')
 
-module.exports = function(ms) {
-  var Client = ms.models.Client;
+module.exports = function(ms, opts, next) {
+  let Client = ms.plugins.models.Client;
 
-  return function(id, cb) {
-    Client.findByIdAndRemove(id, cb);
-  };
-};
+  ms.method({
+    name: 'remove',
+    config: {
+      validate: {
+        id: joi.string().required(),
+      },
+    },
+    handler(params, cb) {
+      Client.findByIdAndRemove(params.id, cb)
+    },
+  })
+
+  next()
+}
+
+module.exports.attributes = {
+  name: 'remove',
+}

@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Client microservice for SiteGate",
   "main": "./lib/index.js",
+  "scripts": {
+    "start": "node app"
+  },
   "keywords": [
     "sitegate"
   ],
@@ -17,7 +20,10 @@
     "url": "git://github.com/sitegate/client.git"
   },
   "dependencies": {
+    "debug": "^2.2.0",
     "dfun": "0.0.1",
+    "jimbo": "0.0.1",
+    "joi": "^7.1.0",
     "mongoose": "^4.1.6",
     "rand-token": "^0.2.1"
   }

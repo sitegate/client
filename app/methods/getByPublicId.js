@@ -1,13 +1,24 @@
-'use strict';
+'use strict'
+const joi = require('joi')
 
-module.exports = function(ms) {
-  var Client = ms.models.Client;
+module.exports = function(ms, opts, next) {
+  let Client = ms.plugins.models.Client;
 
-  return function(publicId, cb) {
-    if (!publicId) {
-      return cb(new Error('publicId is missing'));
-    }
+  ms.method({
+    name: 'getByPublicId',
+    config: {
+      validate: {
+        publicId: joi.string().required(),
+      },
+    },
+    handler(params, cb) {
+      Client.findOne({ publicId: params.publicId }, cb)
+    },
+  })
 
-    Client.findOne({ publicId: publicId }, cb);
-  };
-};
+  next()
+}
+
+module.exports.attributes = {
+  name: 'get-by-public-id',
+}

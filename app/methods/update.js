@@ -1,53 +1,64 @@
-'use strict';
+'use strict'
+const joi = require('joi')
 
-var dfun = require('dfun');
+module.exports = function(ms, opts, next) {
+  let Client = ms.plugins.models.Client
 
-module.exports = function(ms) {
-  var Client = ms.models.Client;
-
-  return dfun(String, Object, [Object, {}], Function,
-    function(id, params, security, cb) {
-      params = params || {};
-
+  ms.method({
+    name: 'update',
+    config: {
+      validate: {
+        id: joi.string().required(),
+        security: joi.object().keys({
+          allow: joi.object().keys({
+            userId: joi.string(),
+          }),
+        }).required(),
+      },
+    },
+    handler(params, cb) {
       Client.findOne({
-        _id: id
+        _id: params.id,
       }, function(err, client) {
-        if (err) {
-          return cb(err);
-        }
+        if (err) return cb(err)
 
-        if (!client) {
-          return cb(new Error('clientNotFound'));
-        }
+        if (!client) return cb(new Error('clientNotFound'))
 
-        if (security.allow && security.allow.userId &&
-          client.userId !== security.allow.userId) {
-          return cb(new Error('You cannot edit a client that was not created by you!'));
+        if (params.security.allow && params.security.allow.userId &&
+          client.userId !== params.security.allow.userId) {
+          return cb(new Error('You cannot edit a client that was not created by you!'))
         }
 
         if (typeof params.name !== 'undefined') {
-          client.name = params.name;
+          client.name = params.name
         }
         if (typeof params.description !== 'undefined') {
-          client.description = params.description;
+          client.description = params.description
         }
         if (typeof params.homepageUrl !== 'undefined') {
-          client.homepageUrl = params.homepageUrl;
+          client.homepageUrl = params.homepageUrl
         }
         if (typeof params.authCallbackUrl !== 'undefined') {
-          client.authCallbackUrl = params.authCallbackUrl;
+          client.authCallbackUrl = params.authCallbackUrl
         }
         if (typeof params.trusted !== 'undefined') {
-          client.trusted = params.trusted;
+          client.trusted = params.trusted
         }
         if (typeof params.publicId !== 'undefined') {
-          client.publicId = params.publicId;
+          client.publicId = params.publicId
         }
         if (typeof params.secret !== 'undefined') {
-          client.secret = params.secret;
+          client.secret = params.secret
         }
 
-        client.save(cb);
-      });
-    });
-};
+        client.save(cb)
+      })
+    },
+  })
+
+  next()
+}
+
+module.exports.attributes = {
+  name: 'update',
+}
