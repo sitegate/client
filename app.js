@@ -1,11 +1,12 @@
 'use strict'
+const config = require('./config')
 const Server = require('jimbo').Server
 
 let server = new Server()
 
 server.connection({
   channel: 'sitegate-client',
-  url: 'amqp://guest:guest@localhost:5672',
+  url: config.get('amqpURI'),
 })
 
 server
@@ -13,7 +14,7 @@ server
     {
       register: require('./models'),
       options: {
-        mongoURI: 'mongodb://localhost:27017/sitegate-user',
+        mongoURI: config.get('mongodbURI'),
       },
     },
     {
