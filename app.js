@@ -21,10 +21,10 @@ server
       register: require('./app/methods/create'),
     },
     {
-      register: require('./app/methods/getById'),
+      register: require('./app/methods/get-by-id'),
     },
     {
-      register: require('./app/methods/getByPublicId'),
+      register: require('./app/methods/get-by-public-id'),
     },
     {
       register: require('./app/methods/query'),

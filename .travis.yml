@@ -4,3 +4,5 @@ services:
   - mongodb
 node_js:
   - v4
+after_script:
+  - npm run coveralls
