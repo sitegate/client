@@ -4,7 +4,7 @@ module.exports = function(ms, opts, next) {
 
   ms.method({
     name: 'query',
-    handler(params, cb) {
+    handler(params) {
       params.fields = params.fields || []
 
       params.count = params.count || 100
@@ -19,10 +19,10 @@ module.exports = function(ms, opts, next) {
         }
       }
 
-      Client
+      return Client
         .find(query, params.fields.join(' '))
         .limit(params.count)
-        .exec(cb)
+        .exec()
     },
   })
 

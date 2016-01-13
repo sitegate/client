@@ -11,10 +11,10 @@ module.exports = function(ms, opts, next) {
         id: joi.string().required(),
       },
     },
-    handler(params, cb) {
-      params.fields = params.fields || [];
+    handler(params) {
+      params.fields = params.fields || []
 
-      Client.findById(params.id, params.fields.join(' '), cb);
+      return Client.findById(params.id, params.fields.join(' '))
     },
   })
 

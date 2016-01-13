@@ -11,8 +11,8 @@ module.exports = function(ms, opts, next) {
         id: joi.string().required(),
       },
     },
-    handler(params, cb) {
-      Client.findByIdAndRemove(params.id, cb)
+    handler(params) {
+      return Client.findByIdAndRemove(params.id)
     },
   })
 

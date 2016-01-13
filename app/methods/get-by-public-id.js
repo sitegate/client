@@ -11,8 +11,8 @@ module.exports = function(ms, opts, next) {
         publicId: joi.string().required(),
       },
     },
-    handler(params, cb) {
-      Client.findOne({ publicId: params.publicId }, cb)
+    handler(params) {
+      return Client.findOne({ publicId: params.publicId }).exec()
     },
   })
 

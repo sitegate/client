@@ -1,55 +1,54 @@
-'use strict';
+'use strict'
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-var ClientSchema = new Schema({
+let ClientSchema = new Schema({
   name: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
   publicId: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
   secret: {
     type: String,
-    required: true
+    required: true,
   },
   userId: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
-    type: String
+    type: String,
   },
   homepageUrl: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
   authCallbackUrl: {
     type: String,
     unique: true,
-    required: true
+    required: true,
   },
   trusted: {
     type: Boolean,
-    default: false
-  }
-});
+    default: false,
+  },
+})
 
 ClientSchema.set('toJSON', {
   transform: function(doc, ret, options) {
-    ret.id = ret._id;
-    delete ret._id;
-    delete ret.__v;
-    return ret;
-  }
-});
+    ret.id = ret._id
+    delete ret._id
+    delete ret.__v
+    return ret
+  },
+})
 
 module.exports = function(connection) {
   return connection.model('Client', ClientSchema);
-};
+}
