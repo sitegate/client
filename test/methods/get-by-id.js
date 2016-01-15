@@ -2,19 +2,18 @@
 const chaiAsPromised = require('chai-as-promised')
 const chai = require('chai')
 const expect = chai.expect
-const mongotest = require('./mongotest')
 const jimbo = require('jimbo')
 const create = require('../../app/methods/create')
 const getById = require('../../app/methods/get-by-id')
 const modelsPlugin = require('../../models')
 const plugiator = require('plugiator')
+const MONGO_URI = 'mongodb://localhost/sitegate-client-tests'
+const clearDB = require('mocha-mongoose')(MONGO_URI)
 
 chai.use(chaiAsPromised)
 
-const MONGO_URI = 'mongodb://localhost/sitegate-client-tests'
-
 describe('getById', function() {
-  beforeEach(mongotest.prepareDb(MONGO_URI));
+  beforeEach(clearDB)
   beforeEach(function(next) {
     this._server = new jimbo.Server()
 
@@ -27,7 +26,6 @@ describe('getById', function() {
       },
     ], err => next(err))
   })
-  afterEach(mongotest.disconnect());
 
   it('should get existing client by id', function() {
     let clientId
