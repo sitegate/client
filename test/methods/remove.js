@@ -14,23 +14,25 @@ const clearDB = require('mocha-mongoose')(MONGO_URI)
 chai.use(chaiAsPromised)
 
 describe('remove', function() {
-  beforeEach(clearDB)
-  beforeEach(function(next) {
-    this._server = new jimbo.Server()
+  let server
 
-    this._server.register([
+  beforeEach(clearDB)
+  beforeEach(function() {
+    server = jimbo()
+
+    return server.register([
       {
         register: modelsPlugin,
         options: {
           mongoURI: MONGO_URI,
         },
       },
-    ], err => next(err))
+    ])
   })
 
   it('should remove client', function() {
     let clientId
-    return this._server
+    return server
       .register([
         {
           register: create,
@@ -53,10 +55,10 @@ describe('remove', function() {
           register: getById,
         },
       ])
-      .then(() => this._server.methods.remove({
+      .then(() => server.methods.remove({
           id: clientId,
         }))
-      .then(() => this._server.methods.getById({
+      .then(() => server.methods.getById({
         id: clientId,
       }))
       .then(client => expect(client).to.not.exist)

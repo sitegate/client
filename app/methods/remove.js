@@ -2,7 +2,7 @@
 const joi = require('joi')
 
 module.exports = function(ms, opts, next) {
-  let Client = ms.plugins.models.Client;
+  let Client = ms.plugins.models.Client
 
   ms.method({
     name: 'remove',

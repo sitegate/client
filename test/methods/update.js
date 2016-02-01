@@ -13,23 +13,25 @@ const clearDB = require('mocha-mongoose')(MONGO_URI)
 chai.use(chaiAsPromised)
 
 describe('update', function() {
-  beforeEach(clearDB)
-  beforeEach(function(next) {
-    this._server = new jimbo.Server()
+  let server
 
-    this._server.register([
+  beforeEach(clearDB)
+  beforeEach(function() {
+    server = jimbo()
+
+    return server.register([
       {
         register: modelsPlugin,
         options: {
           mongoURI: MONGO_URI,
         },
       },
-    ], err => next(err))
+    ])
   })
 
   it('should update client', function() {
     let clientId
-    return this._server
+    return server
       .register([
         {
           register: create,
@@ -50,7 +52,7 @@ describe('update', function() {
           register: update,
         },
       ])
-      .then(() => this._server.methods.update({
+      .then(() => server.methods.update({
         id: clientId,
         name: 'foo-updated',
         security: {
