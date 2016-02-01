@@ -34,6 +34,7 @@ describe('create', function() {
       ])
       .then(() => this._server.methods.create({
           name: 'foo',
+          description: 'foo bar qar qaz',
           userId: '507f191e810c19729de860ea',
           homepageUrl: 'http://foo.com',
           authCallbackUrl: 'http://foo.com/auth/callback',

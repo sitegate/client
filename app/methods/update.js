@@ -10,6 +10,7 @@ module.exports = function(ms, opts, next) {
       validate: {
         id: joi.string().required(),
         name: joi.string(),
+        description: joi.string().allow(''),
         homepageUrl: joi.string(),
         authCallbackUrl: joi.string(),
         security: joi.object().keys({

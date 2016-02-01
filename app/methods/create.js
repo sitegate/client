@@ -10,6 +10,7 @@ module.exports = function(ms, opts, next) {
     config: {
       validate: {
         name: joi.string().required(),
+        description: joi.string().allow(''),
         userId: joi.string().required(),
         homepageUrl: joi.string().required(),
         authCallbackUrl: joi.string().required(),
